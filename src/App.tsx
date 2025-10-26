@@ -9,6 +9,7 @@ import Leaderboard from "./pages/Leaderboard";
 import AITools from "./pages/AITools";
 import Challenges from "./pages/Challenges";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/ai-tools" element={<AITools />} />

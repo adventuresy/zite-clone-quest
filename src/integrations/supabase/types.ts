@@ -14,7 +14,114 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          university: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          university?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          university?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      project_submissions: {
+        Row: {
+          action_plan: string | null
+          changes_after_shrimp: string | null
+          created_at: string
+          excited_for_making_idea_true: string | null
+          excited_for_next_module: string | null
+          hosting_platform: string | null
+          id: string
+          idea_origin: string | null
+          key_findings: string | null
+          live_link: string | null
+          one_liner: string | null
+          platform_used: string | null
+          product_photos: string[] | null
+          product_tone: string | null
+          remarks_given: string | null
+          remarks_received: string | null
+          research_confidence: string | null
+          research_sites: string | null
+          swap_experience: string | null
+          target_audience: string | null
+          team_reactions: string | null
+          understanding_scale: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          action_plan?: string | null
+          changes_after_shrimp?: string | null
+          created_at?: string
+          excited_for_making_idea_true?: string | null
+          excited_for_next_module?: string | null
+          hosting_platform?: string | null
+          id?: string
+          idea_origin?: string | null
+          key_findings?: string | null
+          live_link?: string | null
+          one_liner?: string | null
+          platform_used?: string | null
+          product_photos?: string[] | null
+          product_tone?: string | null
+          remarks_given?: string | null
+          remarks_received?: string | null
+          research_confidence?: string | null
+          research_sites?: string | null
+          swap_experience?: string | null
+          target_audience?: string | null
+          team_reactions?: string | null
+          understanding_scale?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          action_plan?: string | null
+          changes_after_shrimp?: string | null
+          created_at?: string
+          excited_for_making_idea_true?: string | null
+          excited_for_next_module?: string | null
+          hosting_platform?: string | null
+          id?: string
+          idea_origin?: string | null
+          key_findings?: string | null
+          live_link?: string | null
+          one_liner?: string | null
+          platform_used?: string | null
+          product_photos?: string[] | null
+          product_tone?: string | null
+          remarks_given?: string | null
+          remarks_received?: string | null
+          research_confidence?: string | null
+          research_sites?: string | null
+          swap_experience?: string | null
+          target_audience?: string | null
+          team_reactions?: string | null
+          understanding_scale?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

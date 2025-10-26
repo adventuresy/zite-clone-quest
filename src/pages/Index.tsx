@@ -1,7 +1,13 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
+import SubmitProjectDialog from "@/components/SubmitProjectDialog";
 import { Code, Trophy, Zap, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Session } from "@supabase/supabase-js";
 import sdgGoals from "@/assets/sdg-goals.png";
 import community1 from "@/assets/community-1.jpg";
 import community2 from "@/assets/community-2.jpg";
@@ -9,6 +15,34 @@ import community3 from "@/assets/community-3.jpg";
 import community4 from "@/assets/community-4.jpg";
 
 const Index = () => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSubmitClick = () => {
+    if (!session) {
+      toast({
+        title: "Login required",
+        description: "Please log in to submit a project.",
+      });
+      navigate("/auth");
+      return;
+    }
+    setSubmitDialogOpen(true);
+  };
   const features = [
     {
       icon: Code,
@@ -49,15 +83,17 @@ const Index = () => {
           </p>
           
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button variant="outline" size="lg" className="gap-2">
+            <Button variant="outline" size="lg" className="gap-2" onClick={() => navigate("/projects")}>
               <Code className="w-5 h-5" />
               EXPLORE PROJECTS
             </Button>
-            <Button variant="hero" size="lg" className="gap-2">
+            <Button variant="hero" size="lg" className="gap-2" onClick={handleSubmitClick}>
               <ArrowRight className="w-5 h-5" />
               SUBMIT PROJECT
             </Button>
           </div>
+
+          <SubmitProjectDialog open={submitDialogOpen} onOpenChange={setSubmitDialogOpen} />
         </div>
       </section>
 
